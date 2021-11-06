@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import OverviewInfo from "../../Components/OverviewComponent/OverviewInfoComponent";
 
+
 class OverviewScreen extends Component {
     constructor(props) {
         super(props);
@@ -13,10 +14,11 @@ class OverviewScreen extends Component {
         }
     }
     async componentDidMount() {
-        const { data } = await axios.get("http://192.168.1.218:8080/user?id=1");
+        const { data } = await axios.get("http://192.168.1.218:7000/api/user?id=6185dbba5e4546e5871dbc0e");
+        
         this.setState(state => {
             return {
-                currentUser: data[0]
+                currentUser: data
             }
         });
     }

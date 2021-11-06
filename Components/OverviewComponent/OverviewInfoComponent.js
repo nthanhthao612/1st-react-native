@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
 
-const Avatar = {uri:"https://i.imgur.com/f94KMy4.png"};
-
 import InfoComponent from './InfoComponent';
 class OverviewInfo extends Component {
     constructor(props) {
@@ -12,7 +10,7 @@ class OverviewInfo extends Component {
         const {currentUser} = this.props;
         return <View style={styles.container}>
             <View style={styles.avatarArea}>
-                <Image source={currentUser.avatar} style={styles.avatar}></Image>
+                <Image source={{uri:currentUser.avatar}} style={styles.avatar}></Image>
             </View>
             <InfoComponent currentUser={currentUser}></InfoComponent>
         </View>

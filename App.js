@@ -20,10 +20,12 @@ export default class App extends Component {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
-            headerShown: false
+            headerShown: false  
           }}>
           <Stack.Screen name="Authentication" component={AuthenticationNavigator} />
           <Stack.Screen name="MainNavigator" component={MainNavigator} />
+          
+          
         </Stack.Navigator>
       </NavigationContainer>
     );
