@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TextInput } from "react-native";
+import { View, StyleSheet, AsyncStorageStatic,Alert} from "react-native";
 import { Input, Button } from "react-native-elements";
 import axios from "axios";
+import AsyncStorage  from '@react-native-async-storage/async-storage';
 
 class LoginInputComponent extends Component {
     constructor(props) {
@@ -13,9 +14,23 @@ class LoginInputComponent extends Component {
         this.onPressed = this.onPressed.bind(this);
     }
     async onPressed() {
-        const data = await axios.
-            post("http://192.168.1.218:7000/api/login",
+        const {navigation} = this.props;
+        const {data} = await axios.
+            post("http://192.168.1.218:7000/api/user/login",
                 { data: this.state });
+        if(!data.error){
+            await AsyncStorage.setItem('token',data);
+            axios.defaults.headers.common['Authorization'] = data;
+            navigation.navigate("MainNavigator");
+        }else{
+            Alert.alert("login failed",data.error[0]);
+        }
+    }
+    async componentDidMount(){
+        const {navigation} = this.props;
+        if(await AsyncStorage.getItem('token')){
+            navigation.navigate("MainNavigator");
+        }
     }
     render() {
         return <View style={styles.container}>

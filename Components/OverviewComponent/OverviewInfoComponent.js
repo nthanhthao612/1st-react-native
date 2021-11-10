@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Image } from 'react-native';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import InfoComponent from './InfoComponent';
 class OverviewInfo extends Component {
     constructor(props) {
         super(props);
+    }
+    async componentDidMount(){
+        
     }
     render() {
         const {currentUser} = this.props;

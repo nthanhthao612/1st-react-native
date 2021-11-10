@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, NetInfo } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
 import OverviewInfo from "../../Components/OverviewComponent/OverviewInfoComponent";
@@ -14,13 +15,13 @@ class OverviewScreen extends Component {
         }
     }
     async componentDidMount() {
-        const { data } = await axios.get("http://192.168.1.218:7000/api/user?id=6185dbba5e4546e5871dbc0e");
-        
+        let data = await axios.get("http://192.168.1.218:7000/api/user/info");
+        await AsyncStorage.setItem('userData', JSON.stringify(data.data));
         this.setState(state => {
             return {
-                currentUser: data
+                currentUser: data.data
             }
-        });
+        })
     }
     render() {
         const { currentUser } = this.state;
@@ -39,7 +40,7 @@ class OverviewScreen extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop:30,
+        paddingTop: 30,
         flex: 1,
         flexDirection: "column",
         backgroundColor: '#EFEFEF',

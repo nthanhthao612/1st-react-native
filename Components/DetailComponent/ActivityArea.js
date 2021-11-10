@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { Button, Text, View, StyleSheet, FlatList, Image } from 'react-native';
 
+import BloodPressure from "../../img/blood-pressure.png";
+import Bmi from "../../img/bmi.png";
+import HeartBeat from "../../img/heartbeat.png";
+import Sleeping from "../../img/sleeping.png";
+import FootStep from "../../img/footstep.png";
 
 import Numberal from './Numberal';
 
