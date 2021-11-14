@@ -13,6 +13,21 @@ class ActivityArea extends Component {
     constructor(props) {
         super(props);
     }
+    componentDidMount() {
+        console.log(this.props.data);
+        let { data } = this.props;
+        if (data.keyword === "SleepingTime")
+            this.props.data.picture = Sleeping;
+        else if (data.keyword === "Footsteps")
+            this.props.data.picture = FootStep;
+        else if (data.keyword === "HeartBeat")
+            this.props.data.picture = HeartBeat;
+        else if (data.keyword === "BMInumberal")
+            this.props.data.picture = Bmi;
+        else
+            this.props.data.picture = BloodPressure;
+        console.log(this.props.data.picture);
+    }
     render() {
         const { data } = this.props;
         return <View style={styles.container}>
@@ -21,7 +36,7 @@ class ActivityArea extends Component {
             </View>
             <Numberal data={data}></Numberal>
             <View style={styles.Rate}>
-                <Text >Bình thường</Text>
+                <Text >{data.Rate}</Text>
             </View>
 
         </View>
@@ -42,7 +57,7 @@ const styles = StyleSheet.create({
     },
     Rate: {
         flexGrow: 1,
-        alignItems:'flex-end'
+        alignItems: 'flex-end'
     }
 });
 export default ActivityArea;

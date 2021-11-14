@@ -14,7 +14,7 @@ class ChatTab extends Component {
         return (
             <Stack.Navigator
                 screenOptions={({ route }) => ({
-                    headerShown: (route.name === "MainDetails" ? false : true),
+                    headerShown: false,
                 })
                 }
             >

@@ -11,16 +11,14 @@ class ListMessage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            messageList:[]
+            chatBoxList:[],
+            
         }
     }
     async componentDidMount(){
-        const {data} = await axios.get("http://192.168.1.218:8080/messageList");
-        this.setState(state=>{
-            return{
-                messageList:data
-            }
-        });
+        const {data} = await axios.get("http://192.168.1.218:7000/api/message/get");
+        const {chatBoxList} = data;
+        console.log(chatBoxList);
     }
     render() {
         const { messageList } = this.state;
