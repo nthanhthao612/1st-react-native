@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Dimensions } from 'react-native';
 
+const ScreenWidth = Dimensions.get("window").width;
+const ScreenHeight = Dimensions.get("window").height;
 import ActivityArea from './ActivityArea';
 
 class Item extends Component {
@@ -27,7 +30,7 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         marginBottom: 15,
         width: '100%',
-        height: 100,
+        height: ScreenHeight*13/100,
         borderRadius: 4,
         shadowColor: "gray",
         shadowRadius: 10,

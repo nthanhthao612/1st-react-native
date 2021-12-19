@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {View, StyleSheet, Image } from 'react-native';
+import { Dimensions } from 'react-native';
+
+const ScreenWidth = Dimensions.get("window").width;
+const ScreenHeight = Dimensions.get("window").height;
 
 import InfoComponent from './InfoComponent';
 class OverviewInfo extends Component {
@@ -21,7 +23,6 @@ class OverviewInfo extends Component {
         </View>
     }
 }
-
 const styles = StyleSheet.create({
     container: {
         paddingTop:20,
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         height:"35%",
-        width:"100%",
+        width:"90%",
         borderRadius:20
     },
     avatarArea: {
@@ -41,8 +42,8 @@ const styles = StyleSheet.create({
         borderRadius:12
     },
     avatar: {
-        width: 80,
-        height: 80
+        width: ScreenWidth*12/100,
+        height: ScreenWidth*12/100,
     }
 });
 export default OverviewInfo;

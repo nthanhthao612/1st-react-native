@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Image, Text, View, StyleSheet, FlatList, TextInput, ScrollView, TouchableOpacity, InteractionManager } from 'react-native';
+import { Image, Text, View, StyleSheet,TouchableOpacity,} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Avatar = {uri:"https://i.imgur.com/PNV9Tr8.png"};
 
@@ -8,14 +9,16 @@ class Message extends Component{
         super(props);
     }
     render(){
-        const {item} = this.props;
-        return<View style={item.senderId===1?styles.containerSender:styles.containerReceiver}>    
+        const {item, partner} = this.props;
+        const {currentUser} = global;
+        return<View style={item.senderId===currentUser._id?styles.containerSender:styles.containerReceiver}>    
             <View style={styles.AvatarArea}>
-                <Image source={Avatar} style={{width:40,height:40,borderRadius:20}}/>
+                <Image source={{uri:item.senderId===currentUser._id?currentUser.avatar:partner.avatar}} 
+                style={{width:40,height:40,borderRadius:20}}/>
             </View>
             <View style={item.senderId===1?styles.TextAreaCurrent:styles.TextAreaPartner}>
                 <Text style={{fontSize:15}}>{
-                    item.Message
+                    item.content
                 }</Text>
             </View>
         </View>

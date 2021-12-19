@@ -11,15 +11,15 @@ class ChatBox extends Component {
     }
     render() {
         const { route } = this.props;
-        const { Conversation } = route.params.item;
+        const { Conversation,partner} = route.params.item;
         return <View style={styles.container}>
             <FlatList
                 // inverted
                 ref="flatList"
                 onContentSizeChange={() => this.refs.flatList.scrollToEnd()}
                 data={Conversation}
-                renderItem={({ item }) => <Message item={item} />}
-                keyExtractor={item => item.id}
+                renderItem={({item})=><Message item={item} partner={partner}/>}
+                keyExtractor={item => item._id}
                 contentContainerStyle={{ paddingHorizontal: 16 }}
             />
             <View style={styles.inputArea}>

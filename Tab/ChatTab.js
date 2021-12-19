@@ -4,7 +4,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ChatBox from '../Screen/ChatScreen/ChatBox';
 import ListMessage from '../Screen/ChatScreen/ListMessage';
 const Stack = createNativeStackNavigator();
-
 class ChatTab extends Component {
     constructor(props) {
         super(props);
@@ -14,19 +13,19 @@ class ChatTab extends Component {
         return (
             <Stack.Navigator
                 screenOptions={({ route }) => ({
-                    headerShown: false,
+                    headerShown: route.name=="ListChatBox"?false:true,
+                    
                 })
                 }
+                initialRouteName="ListChatBox"
             >
-                <Stack.Screen name="ListFriend" component={ListMessage} />
+                <Stack.Screen name="ListChatBox" component={ListMessage} />
                 <Stack.Screen name="ChatBox" component={ChatBox} />
             </Stack.Navigator>
 
         );
     }
 }
-
-
 
 
 export default ChatTab;

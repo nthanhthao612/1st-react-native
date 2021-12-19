@@ -11,30 +11,29 @@ class MessageBoxComponent extends Component {
         return (<TouchableOpacity onPress={onPressed}>
             <View style={styles.container} >
                 <View style={styles.AvatarArea}>
-                    <Image source={item.Provider.avatar}
+                    <Image source={{uri:item.partner.avatar}}
                         style={{ width: 50, height: 50 }} />
                 </View>
                 <View style={styles.LastMessage}>
                     <Text style={{ fontSize: 14,fontWeight:"bold" }}
                         numberOfLines={1}>
-                        {item.Conversation[item.Conversation.length - 1].senderId}
+                        {`${item.partner.lastName} ${item.partner.firstName}`}
                     </Text>
                     <Text style={{ fontSize: 14 }}
                         numberOfLines={1}>
-                        {item.Conversation[item.Conversation.length - 1].Message}
+                        {item.Conversation[item.Conversation.length - 1].content}
                     </Text>
                 </View>
                 <View style={styles.LastTime}>
                     <Text style={{ fontSize: 10 }}
                         numberOfLines={1}>
-                        {item.Conversation[item.Conversation.length - 1].Time}
+                        {item.Conversation[item.Conversation.length - 1].time}
                     </Text>
                 </View>
             </View>
         </TouchableOpacity>);
     }
 }
-
 
 const styles = StyleSheet.create({
     container: {

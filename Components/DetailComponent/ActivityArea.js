@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
-import { Button, Text, View, StyleSheet, FlatList, Image } from 'react-native';
+import { Text, View, StyleSheet, Image } from 'react-native';
+import { Dimensions } from 'react-native';
 
+const ScreenWidth = Dimensions.get("window").width;
+const ScreenHeight = Dimensions.get("window").height;
 import BloodPressure from "../../img/blood-pressure.png";
 import Bmi from "../../img/bmi.png";
 import HeartBeat from "../../img/heartbeat.png";
 import Sleeping from "../../img/sleeping.png";
 import FootStep from "../../img/footstep.png";
 
-import Numberal from './Numberal';
+import Numberal from './Numeral';
 
 class ActivityArea extends Component {
     constructor(props) {
         super(props);
     }
     componentDidMount() {
-        console.log(this.props.data);
         let { data } = this.props;
         if (data.keyword === "SleepingTime")
             this.props.data.picture = Sleeping;
@@ -22,11 +24,10 @@ class ActivityArea extends Component {
             this.props.data.picture = FootStep;
         else if (data.keyword === "HeartBeat")
             this.props.data.picture = HeartBeat;
-        else if (data.keyword === "BMInumberal")
+        else if (data.keyword === "BMI")
             this.props.data.picture = Bmi;
         else
             this.props.data.picture = BloodPressure;
-        console.log(this.props.data.picture);
     }
     render() {
         const { data } = this.props;
@@ -52,8 +53,8 @@ const styles = StyleSheet.create({
         flexGrow: 1
     },
     pictureIcon: {
-        width: 50,
-        height: 50
+        width: ScreenHeight*6/100,
+        height: ScreenHeight*6/100
     },
     Rate: {
         flexGrow: 1,

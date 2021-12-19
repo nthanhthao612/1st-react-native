@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Text, View, StyleSheet, FlatList, Image } from 'react-native';
 
-class Numberal extends Component {
+class numeral extends Component {
     constructor(props){
         super(props);
     }
@@ -9,27 +9,27 @@ class Numberal extends Component {
         const {data} = this.props;
         if(data.name === 'Tim mạch'){
             return <View style={styles.container}>
-                <Text style={styles.numberalInside}>{`${data.numberal} BPM`}</Text>
+                <Text style={styles.numeralInside}>{`${data.numeral} BPM`}</Text>
             </View>
         }
         else if(data.name === 'Bước chân'){
             return <View style={styles.container}>
-                <Text style={styles.numberalInside}>{`${data.numberal}/6000 bước`}</Text>
+                <Text style={styles.numeralInside}>{`${data.numeral}/6000 bước`}</Text>
             </View>
         }
         else if(data.name === 'Huyết áp'){
             return <View style={styles.container}>
-                <Text style={styles.numberalInside}>{`${data.numberal}/70 mmHg`}</Text>
+                <Text style={styles.numeralInside}>{`${data.numeral}/70 mmHg`}</Text>
             </View>
         }
         else if(data.name === 'BMI'){
             return <View style={styles.container}>
-                <Text style={styles.numberalInside}>{`${data.numberal}`}</Text>
+                <Text style={styles.numeralInside}>{`${data.numeral}`}</Text>
             </View>
         }
         else{
             return <View style={styles.container}>
-                <Text style={styles.numberalInside}>{`${data.numberal} Giờ`}</Text>
+                <Text style={styles.numeralInside}>{`${data.numeral} Giờ`}</Text>
             </View>
         }
     }
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
         flexGrow: 2,
         alignItems:"center"
     },
-    numberalInside:{
+    numeralInside:{
         fontWeight: "bold"
     }
 });
-export default Numberal;
+export default numeral;

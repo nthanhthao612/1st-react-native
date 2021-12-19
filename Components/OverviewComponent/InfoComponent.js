@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet,Image } from 'react-native';
+import { Text, View, StyleSheet} from 'react-native';
 
 class InfoComponent extends Component {
     constructor(props) {
@@ -15,7 +15,6 @@ class InfoComponent extends Component {
         </View>
     }
 }
-
 const styles = StyleSheet.create({
     container:{
         height:"100%",
