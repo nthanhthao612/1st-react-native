@@ -1,8 +1,12 @@
 import React, { Component } from "react";
-import { View, StyleSheet, AsyncStorageStatic,Alert} from "react-native";
+import { View, StyleSheet,Alert} from "react-native";
 import { Input, Button } from "react-native-elements";
 import axios from "axios";
 import AsyncStorage  from '@react-native-async-storage/async-storage';
+
+import RegisterIcon from "../../img/register.png";
+import LoginIcon from "../../img/login.png";
+import Button5 from "../../Components/ButtonCom/Button5";
 
 class LoginInputComponent extends Component {
     constructor(props) {
@@ -11,9 +15,10 @@ class LoginInputComponent extends Component {
             username: "",
             password: ""
         }
-        this.onPressed = this.onPressed.bind(this);
+        this.LoginBtnonPressed = this.LoginBtnonPressed.bind(this);
+        this.RegisterBtnonPressed = this.RegisterBtnonPressed.bind(this);
     }
-    async onPressed() {
+    async LoginBtnonPressed() {
         const {navigation} = this.props;
         const {data} = await axios.
             post("http://192.168.1.218:7000/api/user/login",
@@ -26,6 +31,10 @@ class LoginInputComponent extends Component {
             Alert.alert("login failed",data.error[0]);
         }
     }
+    RegisterBtnonPressed(){
+        const {navigation} = this.props;
+        navigation.navigate("register");
+    }
     async componentDidMount(){
         const {navigation} = this.props;
         if(await AsyncStorage.getItem('token')){
@@ -37,27 +46,28 @@ class LoginInputComponent extends Component {
             <View style={styles.textInput}>
                 <Input
                     placeholder="Username"
-                    label="Username"
+                    label="Tên đăng nhập"
                     leftIcon={{ type: 'font-awesome', name: 'user' }}
                     onChangeText={value => this.setState({ username: value })}
                 />
                 <Input
                     secureTextEntry={true}
                     placeholder="Password"
-                    label="Password"
+                    label="Mật khẩu"
                     leftIcon={{ type: 'font-awesome', name: 'lock' }}
                     onChangeText={value => this.setState({ password: value })}
                 />
             </View>
             <View style={styles.buttonArea}>
-                <Button
-                    title="Sign in"
-                    buttonStyle={styles.buttonInput}
-                    onPress={this.onPressed}
+                <Button5 
+                    icon={LoginIcon}
+                    name={"Đăng nhập"}
+                    onClicked={this.LoginBtnonPressed}
                 />
-                <Button
-                    title="Register"
-                    buttonStyle={styles.buttonInput}
+                <Button5 
+                    icon={RegisterIcon}
+                    name={"Đăng ký"}
+                    onClicked={this.RegisterBtnonPressed}
                 />
             </View>
         </View>
@@ -78,6 +88,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10
     },
     buttonArea: {
-        flexDirection: "row"
+        flexDirection: "row",
+        justifyContent: "space-evenly",
     }
 });

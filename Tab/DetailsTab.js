@@ -2,11 +2,11 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import DetailsScreen from '../Screen/DetailScreen/Details';
-import FootStepsScreen from '../Screen/DetailScreen/Footsteps';
+import FootStepsNavigation from '../Screen/DetailScreen/FootSteps/FootStepsNavigation';
 import BmiNavigation from '../Screen/DetailScreen/BMI/BmiNavigation';
-import SleepingTimeScreen from '../Screen/DetailScreen/SleepingTime';
-import HeartBeatScreen from '../Screen/DetailScreen/HeartBeat';
-import BloodPressureScreen from '../Screen/DetailScreen/BloodPressure';
+import SleepingTimesNavigation from '../Screen/DetailScreen/SleepingTimes/SleepingTimesNavigation';
+import HeartBeatNavigation from '../Screen/DetailScreen/HeartBeat/HeartBeatNavigation';
+import BloodPressureNavigation from '../Screen/DetailScreen/BloodPressure/BloodPressureNavigation';
 
 
 const Stack = createNativeStackNavigator();
@@ -22,11 +22,11 @@ function DetailsTab({navigation,route}){
     }
     >
         <Stack.Screen name="MainDetails" component={DetailsScreen}/>
-        <Stack.Screen name="Footsteps" component={FootStepsScreen}/>
-        <Stack.Screen name="SleepingTime" component={SleepingTimeScreen}/>
-        <Stack.Screen name="BloodPressure" component={BloodPressureScreen}/>
+        <Stack.Screen name="Footsteps" component={FootStepsNavigation}/>
+        <Stack.Screen name="BloodPressure" component={BloodPressureNavigation}/>
+        <Stack.Screen name="SleepingTime" component={SleepingTimesNavigation}/>
         <Stack.Screen name="BMI" component={BmiNavigation}/>
-        <Stack.Screen name="HeartBeat" component={HeartBeatScreen}/>
+        <Stack.Screen name="HeartBeat" component={HeartBeatNavigation}/>
     </Stack.Navigator>
 }
 

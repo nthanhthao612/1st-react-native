@@ -1,45 +1,38 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import { Dimensions } from 'react-native';
 
 const ScreenWidth = Dimensions.get("window").width;
 const ScreenHeight = Dimensions.get("window").height;
 
-class NumeralBox5 extends Component {
+class NumeralVerticalBox1 extends Component {
     constructor(props) {
         super(props);
     }
     render() {
-        const { value, icon } = this.props;
+        const { value, name } = this.props;
         return <TouchableOpacity>
             <View style={styles.container}>
                 <View>
-                    <Image
-                        source={icon}
-                        style={styles.icon} />
+                    <Text>{name}</Text>
                 </View>
-                <View style={{marginLeft:10}}>
-                    <Text style={{fontSize:15}}>{value}</Text>
+                <View>
+                    <Text style={{fontWeight:"bold"}}>{value}</Text>
                 </View>
             </View>
         </TouchableOpacity>
             ;
     }
 }
-export default NumeralBox5;
+export default NumeralVerticalBox1;
 
 const styles = StyleSheet.create({
     container: {
-        width: ScreenWidth*42/100,
-        padding: 15,
-        borderColor: "red",
         borderWidth: 1,
-        flexDirection: "row",
+        width: ScreenWidth * 20 / 100,
+        borderColor: "red",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-    },
-    icon:{
-        width: ScreenWidth*15/100,
-        height: ScreenWidth*15/100,
     }
 });
