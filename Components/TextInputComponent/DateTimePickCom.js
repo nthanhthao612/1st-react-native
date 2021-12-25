@@ -1,26 +1,28 @@
-import React, {useState} from 'react';
-import {View, Button, Platform,TouchableOpacity,Text} from 'react-native';
+import React, {useState,useEffect} from 'react';
+import {View, Button, Platform,TouchableOpacity,TextInput} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-function DateTimePickCom() {
+function DateTimePickCom(props) {
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');
         setDate(currentDate);
+        sendData(selectedDate);
     };
-
     const showMode = (currentMode) => {
         setShow(true);
         setMode(currentMode);
     };
-
     const showDatepicker = () => {
         showMode('date');
     };
+    const sendData = (date) =>{
+        let Data = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+        props.onChangeDate(Data);
+    }
     return (
         <TouchableOpacity>
             <View>
@@ -38,9 +40,10 @@ function DateTimePickCom() {
                     />
                 )}
                 <View style={{ marginTop: 15, alignItems: "center" }}>
-                    <Text style={{ fontSize: 15 }}>
-                        {`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}
-                    </Text>
+                    <TextInput
+                        value={`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}
+                        editable={false}
+                    />
                 </View>
             </View>
         </TouchableOpacity>

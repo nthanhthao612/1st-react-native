@@ -1,4 +1,4 @@
-import React, { Component} from "react";
+import React, { Component } from "react";   
 import { View, StyleSheet, Alert} from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { Input } from "react-native-elements";
@@ -14,16 +14,31 @@ class RegisterInputComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            firstName: "",
+            lastName: "",
             username: "",
             password: "",
             email: "",
             phonenumber: "",
+            dob: "",
             gender: "Nam"
         }
+        this.handleChangeDate = this.handleChangeDate.bind(this);
+        this.RegisterBtnonPressed = this.RegisterBtnonPressed.bind(this);
     }
-    RegisterBtnonPressed() {
+    handleChangeDate = (value) => {
+        this.setState({ dob: value });
+    }
+    async RegisterBtnonPressed() {
         const { navigation } = this.props;
-        navigation.navigate("register");
+        const { data } = await axios.
+            post("http://192.168.1.218:7000/api/user/register",
+                { data: this.state });
+        // if (!data.error) {
+        //     navigation.navigate("login");
+        // } else {
+        //     Alert.alert("Đăng ký lỗi", data.error[0]);
+        // }
     }
     async componentDidMount() {
         const { navigation } = this.props;
@@ -31,9 +46,22 @@ class RegisterInputComponent extends Component {
             navigation.navigate("MainNavigator");
         }
     }
+
     render() {
         return <View style={styles.container}>
             <View style={styles.textInput}>
+                <Input
+                    placeholder="First Name"
+                    label="Tên"
+                    leftIcon={{ type: 'font-awesome', name: 'address-card' }}
+                    onChangeText={value => this.setState({ firstName: value })}
+                />
+                <Input
+                    placeholder="Last Name"
+                    label="Họ"
+                    leftIcon={{ type: 'font-awesome', name: 'address-card' }}
+                    onChangeText={value => this.setState({ lastName: value })}
+                />
                 <Input
                     placeholder="Username"
                     label="Tên đăng nhập"
@@ -67,13 +95,15 @@ class RegisterInputComponent extends Component {
                     <Picker.Item label="Nam" value="Nam" />
                     <Picker.Item label="Nữ" value="Nữ" />
                 </Picker>
-                <DateTimePickCom/>
+                <DateTimePickCom
+                    onChangeDate={this.handleChangeDate}
+                />
             </View>
             <View style={styles.buttonArea}>
                 <Button5
                     icon={RegisterIcon}
                     name={"Đăng ký"}
-                    onClicked={() => console.log("none!")}
+                    onClicked={this.RegisterBtnonPressed}
                 />
             </View>
         </View>
