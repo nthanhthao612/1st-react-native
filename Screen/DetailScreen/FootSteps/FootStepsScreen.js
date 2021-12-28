@@ -7,7 +7,6 @@ const ScreenWidth = Dimensions.get("window").width;
 const ScreenHeight = Dimensions.get("window").height;
 import LastRecordedCom from '../../../Components/FootStepsComponent/LastRecordedCom';
 import Button5 from "../../../Components/ButtonCom/Button5";
-import UpdatingIcon from "../../../img/updating.png";
 import StatisticsIcon from "../../../img/statistics.png";
 
 class FootStepsScreen extends Component {

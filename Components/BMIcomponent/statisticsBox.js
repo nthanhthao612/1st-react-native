@@ -15,16 +15,16 @@ class StatisticsBox extends Component {
         super(props);
     }
     render() {
-        let { item } = this.props;
+        let { BMI,Date } = this.props.item;
         return <View style={styles.container}>
             <NumeralVerticalBox5
-                value={`${item.BMI.height} CM`}
+                value={`${BMI.height} CM`}
                 icon={HeightIcon} />
             <NumeralVerticalBox5
-                value={`${item.BMI.weight} KG`}
+                value={`${BMI.weight} KG`}
                 icon={WeightIcon} />
             <NumeralVerticalBox5
-                value={item.BMI.numeral}
+                value={BMI.numeral}
                 icon={BMIIcon} />
             <View style={
                 {
@@ -32,8 +32,8 @@ class StatisticsBox extends Component {
                     alignItems:"center",
                 }
             }>
-                <Text style={{ fontWeight: "bold",fontSize: 12}}>{item.Date}</Text>
-                <Text style={{ fontWeight: "bold",fontSize: 12 }}>{item.BMI.time}</Text>
+                <Text style={{ fontWeight: "bold",fontSize: 12}}>{Date}</Text>
+                <Text style={{ fontWeight: "bold",fontSize: 12 }}>{BMI.time}</Text>
             </View>
         </View>;
     }
@@ -47,8 +47,13 @@ let styles = StyleSheet.create({
         borderWidth: 1,
         height: ScreenHeight * 18 / 100,
         width: ScreenWidth * 94 / 100,
-        backgroundColor: "red",
+        backgroundColor: "lightgray",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        borderRadius: 10,
+        shadowColor: "gray",
+        shadowRadius: 10,
+        shadowOpacity: 0.9, 
+        shadowOffset: { width: 0, height: 0 }
     }
 });

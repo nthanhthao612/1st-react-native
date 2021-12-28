@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import BMIScreen from './BMIScreen';
@@ -16,7 +16,7 @@ function BmiNavigation({ navigation, route }) {
     >
         <Stack.Screen name="Overview" component={BMIScreen} />
         <Stack.Screen name="Statistics" component={StatisticsScreen} />
-        {/* <Stack.Screen name="Update" component={UpdateScreen}/> */}
+        <Stack.Screen name="Update" component={UpdateScreen}/>
     </Stack.Navigator>
 }
 export default BmiNavigation;

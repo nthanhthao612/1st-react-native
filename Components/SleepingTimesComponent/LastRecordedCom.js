@@ -34,6 +34,11 @@ const styles = StyleSheet.create({
         borderColor: "red",
         borderWidth: 2,
         borderRadius: ScreenHeight*50/100,
+        borderColor: "gray",
+        shadowColor: "gray",
+        shadowRadius: 10,
+        shadowOpacity: 0.9, 
+        shadowOffset: { width: 0, height: 0 }
     },
     numeral: {
         height: "100%",

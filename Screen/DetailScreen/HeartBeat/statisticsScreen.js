@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {StyleSheet, FlatList } from 'react-native';
 import { Dimensions } from 'react-native';
 
-import StatisticsBox from '../../../Components/BloodPressureComponent/statisticsBox';
+import StatisticsBox from '../../../Components/HeartBeatComponent/statisticsBox';
 const ScreenWidth = Dimensions.get("window").width;
 const ScreenHeight = Dimensions.get("window").height;
 
@@ -19,7 +19,7 @@ class StatisticsScreen extends Component {
         listRecorded.map((item) => {
             tempArray = [
                 {
-                    BloodPressure: item.bloodPressure,
+                    HeartBeat: item.heartBeat,
                     Date: item.Date
                 }, ...tempArray
             ];

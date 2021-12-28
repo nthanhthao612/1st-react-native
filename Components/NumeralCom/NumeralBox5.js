@@ -32,11 +32,17 @@ const styles = StyleSheet.create({
     container: {
         width: ScreenWidth*42/100,
         padding: 15,
-        borderColor: "red",
-        borderWidth: 1,
+        
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
+        borderRadius:4,
+        borderColor: "gray",
+        borderWidth: 2,
+        shadowColor: "gray",
+        shadowRadius: 10,
+        shadowOpacity: 0.9, 
+        shadowOffset: { width: 0, height: 0 }
     },
     icon:{
         width: ScreenWidth*15/100,

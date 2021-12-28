@@ -1,5 +1,5 @@
 import React, { Component, lazy } from 'react';
-import {View, StyleSheet} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Dimensions } from 'react-native';
 
@@ -20,10 +20,13 @@ class BMIScreen extends Component {
         this.state = {
             listRecorded: {},
             lastRecorded: {},
-            lastDate: ""
+            lastDate: "",
+            reload: false
         }
+        this.UpdateBtnClicked = this.UpdateBtnClicked.bind(this);
     }
     async componentDidMount() {
+        console.log("BMI MOUNT");
         let healthCare = JSON.parse(
             await AsyncStorage.getItem('healthcare'));
         let { listRecorded } = healthCare;
@@ -36,40 +39,49 @@ class BMIScreen extends Component {
                 lastRecorded: BMI,
             }
         });
-        this.setState(state =>{
-            return{
-                lastDate: this.state.listRecorded[this.state.listRecorded.length-1].Date
+        this.setState(state => {
+            return {
+                lastDate: this.state.listRecorded[this.state.listRecorded.length - 1].Date
             }
         })
     }
-    render() {
-        let { lastRecorded,listRecorded,lastDate} = this.state;
+    async componentWillUnmount(){
+        console.log("BMI unmount");
+    }
+    UpdateBtnClicked(){
+        let {lastRecorded} = this.state;
         let {navigation} = this.props;
+        this.props.navigation.replace('Update');
+        navigation.navigate("Update", { lastRecorded: lastRecorded});
+    }
+    render() {
+        let { lastRecorded, listRecorded, lastDate } = this.state;
+        let { navigation } = this.props;
         return <View style={styles.container}>
-            <LastRecordedCom 
-            data={lastRecorded}
-            lastDate={lastDate}
+            <LastRecordedCom
+                data={lastRecorded}
+                lastDate={lastDate}
             />
             <View style={styles.height_weight}>
-                <NumeralBox5 
+                <NumeralBox5
                     icon={HeightIcon}
-                    value={"60 kg"}
+                    value={lastRecorded.height}
                 />
-                <NumeralBox5 
+                <NumeralBox5
                     icon={WeightIcon}
-                    value={"163 Cm"}
+                    value={lastRecorded.weight}
                 />
             </View>
             <View style={styles.ButtonArea}>
-                <Button5 
-                icon={UpdatingIcon}
-                name={"Cập Nhật"}
-                onClicked={()=>navigation.navigate("Update",{lastRecorded:lastRecorded})}
+                <Button5
+                    icon={UpdatingIcon}
+                    name={"Cập Nhật"}
+                    onClicked={this.UpdateBtnClicked}
                 />
-                <Button5 
-                icon={StatisticsIcon}
-                name={"Lịch sử"}
-                onClicked={()=>navigation.navigate("Statistics",{listRecorded:listRecorded})}
+                <Button5
+                    icon={StatisticsIcon}
+                    name={"Lịch sử"}
+                    onClicked={() => navigation.navigate("Statistics", { listRecorded: listRecorded })}
                 />
             </View>
         </View>
@@ -78,7 +90,7 @@ class BMIScreen extends Component {
 
 export default BMIScreen;
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
     container: {
         flexDirection: "column",
         alignItems: "center",
@@ -92,10 +104,10 @@ const styles = StyleSheet.create({
         height: "10%",
         width: "95%"
     },
-    ButtonArea:{
+    ButtonArea: {
         marginTop: 20,
         flexDirection: 'row',
-        width:"100%",
+        width: "100%",
         justifyContent: "space-around",
     }
 });

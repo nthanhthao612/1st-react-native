@@ -1,45 +1,23 @@
 import React, { Component } from 'react';
-import { Button, Text, View, StyleSheet, FlatList, Image } from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 
 class numeral extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
     }
     render() {
-        const {data} = this.props;
-        if(data.name === 'Tim mạch'){
-            return <View style={styles.container}>
-                <Text style={styles.numeralInside}>{`${data.numeral} BPM`}</Text>
-            </View>
-        }
-        else if(data.name === 'Bước chân'){
-            return <View style={styles.container}>
-                <Text style={styles.numeralInside}>{`${data.numeral}/6000 bước`}</Text>
-            </View>
-        }
-        else if(data.name === 'Huyết áp'){
-            return <View style={styles.container}>
-                <Text style={styles.numeralInside}>{`${data.numeral}/70 mmHg`}</Text>
-            </View>
-        }
-        else if(data.name === 'BMI'){
-            return <View style={styles.container}>
-                <Text style={styles.numeralInside}>{`${data.numeral}`}</Text>
-            </View>
-        }
-        else{
-            return <View style={styles.container}>
-                <Text style={styles.numeralInside}>{`${data.numeral} Giờ`}</Text>
-            </View>
-        }
+        const { data } = this.props;
+        return <View style={styles.container}>
+            <Text style={styles.numeralInside}>{`${data.numeral} ${data.unit}`}</Text>
+        </View>
     }
 }
 const styles = StyleSheet.create({
     container: {
         flexGrow: 2,
-        alignItems:"center"
+        alignItems: "center"
     },
-    numeralInside:{
+    numeralInside: {
         fontWeight: "bold"
     }
 });

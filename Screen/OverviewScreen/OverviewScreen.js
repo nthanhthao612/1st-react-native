@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { View, StyleSheet,Text } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import Barcode from '@kichiyaki/react-native-barcode-generator';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 import { Dimensions } from 'react-native';
 
 const ScreenWidth = Dimensions.get("window").width;
@@ -15,15 +14,15 @@ function DisplayQRCode(props) {
     return <QRCode
         value="https://www.facebook.com/Killer.use/"
         logoBackgroundColor='transparent'
-        size={ScreenWidth*2/3}
+        size={ScreenWidth * 2 / 3}
     />
 }
 function DisplayBarCode(props) {
     return <Barcode
         value="https://www.facebook.com/Killer.use/"
         logoBackgroundColor='transparent'
-        maxWidth={ScreenWidth*4/5}
-        height={ScreenWidth*3/7}
+        maxWidth={ScreenWidth * 4 / 5}
+        height={ScreenWidth * 3 / 7}
     />
 }
 
@@ -38,23 +37,11 @@ class OverviewScreen extends Component {
     }
     async componentDidMount() {
         let userData = await AsyncStorage.getItem('userData');
-        if (!userData) {
-            let data = await axios.get("http://192.168.1.218:7000/api/user/info");
-            await AsyncStorage.setItem('userData', JSON.stringify(data.data));
-            global.currentUser = data.data;
-            this.setState(state => {
-                return {
-                    currentUser: data.data
-                }
-            })
-        } else {
-            this.setState(state => {
-                return {
-                    currentUser: JSON.parse(userData)
-                }
-            })
-        }
-
+        this.setState(state => {
+            return {
+                currentUser: JSON.parse(userData)
+            }
+        });
     }
     switchButtonChange() {
         this.setState({
@@ -73,7 +60,7 @@ class OverviewScreen extends Component {
             </View>
             <View style={styles.overviewPicArea}>
                 {
-                    this.state.isQRCode?<DisplayQRCode/>:<DisplayBarCode/>
+                    this.state.isQRCode ? <DisplayQRCode /> : <DisplayBarCode />
                 }
             </View>
             <OverviewInfo currentUser={currentUser}></OverviewInfo>

@@ -31,10 +31,10 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         width: '100%',
         height: ScreenHeight*13/100,
-        borderRadius: 4,
+        borderRadius: 5,
         shadowColor: "gray",
         shadowRadius: 10,
-        shadowOpacity: 0.9,
+        shadowOpacity: 0.9, 
         shadowOffset: { width: 0, height: 0 }
     },
     ActivityName: {

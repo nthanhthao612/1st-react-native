@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import BlackScreen from './Screen/BlankScreen/BlankScreen';
+import BlackScreen1 from './Screen/BlankScreen/BlankScreen1';
+import BlackScreen2 from './Screen/BlankScreen/BlankScreen2';
 import AuthenticationNavigator from './AuthenticationNavigator';
 import MainNavigator from './MainNavigator';
 
@@ -23,9 +24,10 @@ export default class App extends Component {
           screenOptions={{
             headerShown: false
           }}
-          initialRouteName="BlankScreen"
+          initialRouteName="BlankScreen1"
         >
-          <Stack.Screen name="BlankScreen" component={BlackScreen} />
+          <Stack.Screen name="BlankScreen1" component={BlackScreen1} />
+          <Stack.Screen name="BlankScreen2" component={BlackScreen2} />
           <Stack.Screen name="MainNavigator" component={MainNavigator} />
           <Stack.Screen name="Authentication" component={AuthenticationNavigator} />
         </Stack.Navigator>

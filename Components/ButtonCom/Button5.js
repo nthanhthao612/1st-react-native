@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, TouchableOpacity,Image} from 'react-native';
 import { Dimensions } from 'react-native';
 
 const ScreenWidth = Dimensions.get("window").width;
-const ScreenHeight = Dimensions.get("window").height;
 class Button5 extends Component {
     constructor(props) {
         super(props);

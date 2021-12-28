@@ -41,8 +41,7 @@ class StatisticsBox extends Component {
                     alignItems:"center",
                 }
             }>
-                {/* <Text style={{ fontWeight: "bold",fontSize: 12}}>{item.Date}</Text>
-                <Text style={{ fontWeight: "bold",fontSize: 12 }}>{item.BMI.time}</Text> */}
+                <Text style={{ fontWeight: "bold",fontSize: 12}}>{item.Date}</Text>
             </View>
         </View>;
     }
@@ -52,12 +51,17 @@ export default StatisticsBox;
 let styles = StyleSheet.create({
     container: {
         flexDirection: "row",
+        justifyContent:"space-around",
         margin: 10,
         borderWidth: 1,
         height: ScreenHeight * 18 / 100,
         width: ScreenWidth * 94 / 100,
-        backgroundColor: "red",
+        backgroundColor: "lightgray",
         alignItems: "center",
-        justifyContent: "center"
+        borderRadius: 10,
+        shadowColor: "gray",
+        shadowRadius: 10,
+        shadowOpacity: 0.9, 
+        shadowOffset: { width: 0, height: 0 }
     }
 });

@@ -30,11 +30,12 @@ class StatisticsScreen extends Component {
         })
     }
     render() {
-        let {listRecorded} = this.state;
+        let { listRecorded } = this.state;
+        console.log(listRecorded)
         return <FlatList
             data={listRecorded}
-            renderItem={({item})=><StatisticsBox item={item}/>}
-            keyExtractor={(item,index)=>index.toString()}
+            renderItem={({ item }) => <StatisticsBox item={item} />}
+            keyExtractor={(item, index) => index.toString()}
             contentContainerStyle={styles.container}
         />
     }
@@ -44,9 +45,7 @@ export default StatisticsScreen;
 const styles = StyleSheet.create({
     container: {
         marginTop: 20,
-        flexDirection:"column",
-        // height:"100%",
-        // width: "100%",
+        flexDirection: "column",
         alignItems: "center",
     }
 });

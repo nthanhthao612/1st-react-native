@@ -11,10 +11,10 @@ class ListMessage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            chatBoxList:[]
+            chatBoxList: []
         }
     }
-    async componentDidMount(){
+    async componentDidMount() {
         // if(!await AsyncStorage.getItem('chatBoxList')){
         //     const {data} = await axios.get("http://192.168.1.218:7000/api/message/get");
         //     await AsyncStorage.setItem('chatBoxList',JSON.stringify(data));
@@ -24,20 +24,21 @@ class ListMessage extends Component {
         //         }
         //     });
         // }else{
-        //     let data = JSON.parse(await AsyncStorage.getItem('chatBoxList'));
+
+        // }
+        let data = JSON.parse(await AsyncStorage.getItem('chatBoxList'));
+        this.setState(state => {
+            return {
+                chatBoxList: data
+            }
+        });
+        // const {data} = await axios.get("http://192.168.1.218:7000/api/message/get");
+        //     await AsyncStorage.setItem('chatBoxList',JSON.stringify(data));
         //     this.setState(state => {
         //         return {
         //             chatBoxList:data
         //         }
-        //     });
-        // }
-        const {data} = await axios.get("http://192.168.1.218:7000/api/message/get");
-            await AsyncStorage.setItem('chatBoxList',JSON.stringify(data));
-            this.setState(state => {
-                return {
-                    chatBoxList:data
-                }
-            });
+        // });
     }
     render() {
         const { chatBoxList } = this.state;

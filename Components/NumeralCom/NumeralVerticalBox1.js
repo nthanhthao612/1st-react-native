@@ -28,9 +28,7 @@ export default NumeralVerticalBox1;
 
 const styles = StyleSheet.create({
     container: {
-        borderWidth: 1,
         width: ScreenWidth * 20 / 100,
-        borderColor: "red",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",

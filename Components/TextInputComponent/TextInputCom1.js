@@ -7,8 +7,9 @@ class TextInputCom5 extends Component{
         super(props);
     }
     render(){
-        let {placeholder,label,iconname} = this.props;
-        return <View>
+
+        let {placeholder,label,iconname,value} = this.props;
+        return <View style={styles.container}>
             <Input
                     placeholder={placeholder}
                     label={label}
@@ -19,3 +20,9 @@ class TextInputCom5 extends Component{
     }
 }
 export default TextInputCom5;
+
+let styles = StyleSheet.create({
+    container:{
+        width: "80%"
+    }
+});

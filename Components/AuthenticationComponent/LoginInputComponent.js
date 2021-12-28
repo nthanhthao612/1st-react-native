@@ -26,7 +26,7 @@ class LoginInputComponent extends Component {
         if(!data.error){
             await AsyncStorage.setItem('token',data);
             axios.defaults.headers.common['Authorization'] = data;
-            navigation.navigate("MainNavigator");
+            navigation.navigate("BlankScreen2");
         }else{
             Alert.alert("login failed",data.error[0]);
         }

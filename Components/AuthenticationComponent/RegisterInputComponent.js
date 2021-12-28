@@ -14,6 +14,7 @@ class RegisterInputComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            error:[],
             firstName: "",
             lastName: "",
             username: "",
@@ -34,11 +35,13 @@ class RegisterInputComponent extends Component {
         const { data } = await axios.
             post("http://192.168.1.218:7000/api/user/register",
                 { data: this.state });
-        // if (!data.error) {
-        //     navigation.navigate("login");
-        // } else {
-        //     Alert.alert("Đăng ký lỗi", data.error[0]);
-        // }
+        if (!data.error) {
+            Alert.alert("Đăng ký thành công","Mời đăng nhập");
+            navigation.navigate("login");
+        } else {
+            Alert.alert("Đăng ký lỗi",data.error.toString());
+            this.setState({error:data.error});
+        }
     }
     async componentDidMount() {
         const { navigation } = this.props;
@@ -48,6 +51,7 @@ class RegisterInputComponent extends Component {
     }
 
     render() {
+
         return <View style={styles.container}>
             <View style={styles.textInput}>
                 <Input

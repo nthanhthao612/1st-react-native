@@ -25,8 +25,13 @@ const styles = StyleSheet.create({
         marginTop: 30,
         height: "30%",
         width: "70%",
-        borderColor: "red",
-        borderWidth: 2,
+        borderWidth: 4,
+        borderColor: "gray",
+        borderRadius: 15,
+        shadowColor: "gray",
+        shadowRadius: 10,
+        shadowOpacity: 0.9, 
+        shadowOffset: { width: 0, height: 0 }
     },
     numberal: {
         height:"100%",
