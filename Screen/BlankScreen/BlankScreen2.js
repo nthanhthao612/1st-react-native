@@ -17,9 +17,8 @@ export default class BlankScreen2 extends Component {
             get("http://192.168.1.218:7000/api/healthcare/getfinal");
         await AsyncStorage.setItem('healthcare', JSON.stringify(data));
         
-        const message = await axios.get("http://192.168.1.218:7000/api/message/get");
-            console.log(message);
-            // await AsyncStorage.setItem('chatBoxList',JSON.stringify(message));
+        let message = await axios.get("http://192.168.1.218:7000/api/message/get");
+            await AsyncStorage.setItem('chatBoxList',JSON.stringify(message.data));
         navigation.navigate("MainNavigator");
     }
     render() {

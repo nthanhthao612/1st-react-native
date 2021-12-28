@@ -41,7 +41,7 @@ function DateTimePickCom(props) {
                 )}
                 <View style={{ marginTop: 15, alignItems: "center" }}>
                     <TextInput
-                        value={`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}
+                        value={`${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`}
                         editable={false}
                     />
                 </View>

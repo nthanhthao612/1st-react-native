@@ -9,7 +9,7 @@ class InfoComponent extends Component {
         const {currentUser} = this.props;
         return <View style={styles.container}>
             <Text style={styles.infoText}>{`Tên: ${currentUser.lastName} ${currentUser.firstName}`}</Text>
-            <Text style={styles.infoText}>{`Ngày sinh: ${currentUser.DoB}`}</Text>
+            <Text style={styles.infoText}>{`Ngày sinh: ${currentUser.dob}`}</Text>
             <Text style={styles.infoText}>{`Giới tính: ${currentUser.gender}`}</Text>
             <Text style={styles.infoText}>{`Thể trạng: Bình Thường`}</Text>
         </View>
