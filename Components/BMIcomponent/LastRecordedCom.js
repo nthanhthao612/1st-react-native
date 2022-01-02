@@ -4,10 +4,21 @@ import { Text, View, StyleSheet} from 'react-native';
 class LastRecordedCom extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            lastDate: props.lastDate,
+            data: props.data
+        }
+    }
+    UNSAFE_componentWillReceiveProps(nextProps){
+        this.setState(state=>{
+            return {
+                lastDate: nextProps.lastDate,
+                data: nextProps.data
+            }
+        })
     }
     render() {
-        let {data} = this.props;
-        let {lastDate} = this.props;
+        let {lastDate,data} = this.props;
         return <View style={styles.container}>
             <View style={styles.numberal}>
                 <Text style={{fontSize:30,fontWeight:'bold'}}>{data.numeral}</Text>

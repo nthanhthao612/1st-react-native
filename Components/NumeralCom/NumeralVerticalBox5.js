@@ -8,9 +8,21 @@ const ScreenHeight = Dimensions.get("window").height;
 class NumeralVerticalBox5 extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            value: props.value,
+            icon: props.icon
+        }
+    }
+    UNSAFE_componentWillReceiveProps(nextProps){
+        this.setState(state=>{
+            return {
+                value: nextProps.value,
+                icon: nextProps.icon
+            }
+        })
     }
     render() {
-        const { value, icon } = this.props;
+        const { value, icon } = this.state;
         return <TouchableOpacity>
             <View style={styles.container}>
                 <View>
@@ -22,7 +34,7 @@ class NumeralVerticalBox5 extends Component {
                         }} />
                 </View>
                 <View>
-                    <Text style={{fontWeight:"bold"}}>{value}</Text>
+                    <Text style={{ fontWeight: "bold" }}>{value}</Text>
                 </View>
             </View>
         </TouchableOpacity>

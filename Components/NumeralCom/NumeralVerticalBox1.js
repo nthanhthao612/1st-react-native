@@ -8,9 +8,21 @@ const ScreenHeight = Dimensions.get("window").height;
 class NumeralVerticalBox1 extends Component {
     constructor(props) {
         super(props);
+        this.state= {
+            name:props.name,
+            value: props.value
+        }
+    }
+    UNSAFE_componentWillReceiveProps(nextProps){
+        this.setState(state=>{
+            return {
+                value: nextProps.value,
+                name: nextProps.name
+            }
+        })
     }
     render() {
-        const { value, name } = this.props;
+        const { value, name } = this.state;
         return <TouchableOpacity>
             <View style={styles.container}>
                 <View>

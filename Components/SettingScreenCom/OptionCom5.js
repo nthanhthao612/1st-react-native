@@ -1,39 +1,37 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity,Image} from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import { Dimensions } from 'react-native';
 
 const ScreenWidth = Dimensions.get("window").width;
-const ScreenHeight = Dimensions.get("window").height;
-class Button5 extends Component {
+class OptionCom5 extends Component {
     constructor(props) {
         super(props);
     }
     render() {
-        const { name} = this.props;
+        const {name} = this.props;
         const { onClicked } = this.props;
         return <TouchableOpacity onPress={onClicked}>
             <View style={styles.container}>
                 <Text
-                    style={{ marginHorizontal: 5, fontWeight:"bold"}}
+                    style={{ marginHorizontal: 5,
+                        paddingLeft:20,
+                        fontWeight:"bold"}}
                 >{name}
                 </Text>
             </View>
-        </TouchableOpacity>
-            ;
+        </TouchableOpacity>;
     }
 }
-export default Button5;
+export default OptionCom5;
 
 const styles = StyleSheet.create({
     container: {
-        marginVertical: 20,
+        margin: 5,
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "center",
-        width: ScreenWidth*25/100,
-        borderWidth: 1,
-        borderRadius: 10,
-        padding: 10,
-        backgroundColor: "lightgray",
+        width: ScreenWidth*85/100,
+        borderWidth: 0.3,
+        borderRadius: 5,
+        padding: 10
     }
 });

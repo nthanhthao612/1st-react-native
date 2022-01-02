@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Text, View, StyleSheet, FlatList, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, Text, View, StyleSheet,TouchableOpacity } from 'react-native';
 
 
 class MessageBoxComponent extends Component {
@@ -37,13 +37,14 @@ class MessageBoxComponent extends Component {
 
 const styles = StyleSheet.create({
     container: {
+        marginTop:20,
         flexDirection: "row",
         elevation: 1,
         alignItems: "center",
         marginBottom: 15,
         width: '100%',
         height: 75,
-        backgroundColor: "blue",
+        backgroundColor: "lightgray",
         borderRadius: 18
     },
     AvatarArea: {

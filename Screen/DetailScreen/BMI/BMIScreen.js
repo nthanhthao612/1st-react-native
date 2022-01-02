@@ -1,15 +1,14 @@
-import React, { Component, lazy } from 'react';
+import React, { Component} from 'react';
 import { View, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Dimensions } from 'react-native';
+import axios from 'axios';
 
-const ScreenWidth = Dimensions.get("window").width;
-const ScreenHeight = Dimensions.get("window").height;
+import EditIcon from "../../../img/edit.png";
 import LastRecordedCom from '../../../Components/BMIcomponent/LastRecordedCom';
 import HeightIcon from "../../../img/height.png";
 import WeightIcon from "../../../img/weight.png";
 import Button5 from "../../../Components/ButtonCom/Button5";
-import UpdatingIcon from "../../../img/updating.png";
+import RefreshIcon from "../../../img/updating.png";
 import StatisticsIcon from "../../../img/statistics.png";
 import NumeralBox5 from '../../../Components/NumeralCom/NumeralBox5';
 
@@ -21,41 +20,54 @@ class BMIScreen extends Component {
             listRecorded: {},
             lastRecorded: {},
             lastDate: "",
-            reload: false
+            reload: true
         }
-        this.UpdateBtnClicked = this.UpdateBtnClicked.bind(this);
+        this.EditBtnClicked = this.EditBtnClicked.bind(this);
+        this.RefreshBtnClicked = this.RefreshBtnClicked.bind(this);
     }
     async componentDidMount() {
         console.log("BMI MOUNT");
-        let healthCare = JSON.parse(
-            await AsyncStorage.getItem('healthcare'));
-        let { listRecorded } = healthCare;
-        let lastRecorded = JSON.parse(
-            await AsyncStorage.getItem('lastRecorded'));
-        let { BMI } = lastRecorded;
-        this.setState(state => {
-            return {
-                listRecorded: listRecorded,
-                lastRecorded: BMI,
-            }
-        });
-        this.setState(state => {
-            return {
-                lastDate: this.state.listRecorded[this.state.listRecorded.length - 1].Date
-            }
-        })
+        await AsyncStorage.removeItem('healthcare');
+        const { data } = await axios.
+            get("http://192.168.1.218:7000/api/healthcare/getfinal");
+        if (data) {
+            await AsyncStorage.setItem('healthcare', JSON.stringify(data));
+            let healthCare = JSON.parse(
+                await AsyncStorage.getItem('healthcare'));
+            let { listRecorded } = healthCare;
+            let lastRecorded = JSON.parse(
+                await AsyncStorage.getItem('lastRecorded'));
+            let { BMI } = lastRecorded;
+            this.setState(state => {
+                return {
+                    listRecorded: listRecorded,
+                    lastRecorded: BMI,
+                }
+            });
+            this.setState(state => {
+                return {
+                    lastDate: this.state.listRecorded[this.state.listRecorded.length - 1].Date
+                }
+            });
+            console.log("xong");
+        }else{
+            console.log("co loi");
+        }
     }
-    async componentWillUnmount(){
-        console.log("BMI unmount");
+    componentWillUnmount(){
+        console.log("unmout");
     }
-    UpdateBtnClicked(){
-        let {lastRecorded} = this.state;
-        let {navigation} = this.props;
+    EditBtnClicked() {
+        let { lastRecorded } = this.state;
+        let { navigation } = this.props;
         this.props.navigation.replace('Update');
-        navigation.navigate("Update", { lastRecorded: lastRecorded});
+        navigation.navigate("Update", { lastRecorded: lastRecorded });
+    }
+    async RefreshBtnClicked() {
     }
     render() {
         let { lastRecorded, listRecorded, lastDate } = this.state;
+        // console.log(lastRecorded);
         let { navigation } = this.props;
         return <View style={styles.container}>
             <LastRecordedCom
@@ -74,14 +86,21 @@ class BMIScreen extends Component {
             </View>
             <View style={styles.ButtonArea}>
                 <Button5
-                    icon={UpdatingIcon}
+                    icon={EditIcon}
                     name={"Cập Nhật"}
-                    onClicked={this.UpdateBtnClicked}
+                    onClicked={this.EditBtnClicked}
                 />
                 <Button5
                     icon={StatisticsIcon}
                     name={"Lịch sử"}
                     onClicked={() => navigation.navigate("Statistics", { listRecorded: listRecorded })}
+                />
+            </View>
+            <View style={styles.RefreshBtnArea}>
+                <Button5
+                    icon={RefreshIcon}
+                    name={"Làm mới"}
+                    onClicked={this.RefreshBtnClicked}
                 />
             </View>
         </View>
@@ -109,5 +128,10 @@ let styles = StyleSheet.create({
         flexDirection: 'row',
         width: "100%",
         justifyContent: "space-around",
+    },
+    RefreshBtnArea: {
+        height: "30%",
+        justifyContent: "flex-end",
+        alignItems: "flex-end",
     }
 });

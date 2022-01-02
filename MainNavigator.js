@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import DetailsTab from './Tab/DetailsTab';
 import OverviewTab from './Tab/OverviewTab';
 import ChatTab from './Tab/ChatTab';
-import SettingsScreen from './Screen/SettingScreen/SettingScreen';
+import SettingsTab from './Tab/SettingTab';
 
 const Tab = createBottomTabNavigator();
 
@@ -52,7 +52,7 @@ export default class MainNavigator extends Component {
                 <Tab.Screen name="Overview" component={OverviewTab} />
                 <Tab.Screen name="Details" component={DetailsTab} />
                 <Tab.Screen name="Chat" component={ChatTab} />
-                <Tab.Screen name="Settings" component={SettingsScreen} />
+                <Tab.Screen name="Settings" component={SettingsTab} />
             </Tab.Navigator>
         );
     }

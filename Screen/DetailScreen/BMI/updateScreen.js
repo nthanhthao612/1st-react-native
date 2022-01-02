@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { View, StyleSheet} from "react-native";
-import { Input } from "react-native-elements";
+import { View, StyleSheet,  Alert} from "react-native";
+import { Input} from "react-native-elements";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from "axios";
 
@@ -43,20 +43,18 @@ class UpdateScreen extends Component {
                 }
             }
         });
-        let tempObject = await JSON.parse(AsyncStorage.getItem('healthcare'));
-        // await AsyncStorage.removeItem('healthcare');
+        let tempObject = JSON.parse(await AsyncStorage.getItem('healthcare'));
         let last = tempObject.listRecorded[tempObject.listRecorded.length - 1];
         tempObject.listRecorded[tempObject.listRecorded.length - 1] = {
             ...last,
             BMI: this.state.lastRecorded
         }
-
-        // console.log(tempObject.listRecorded[tempObject.listRecorded.length - 1]);
-        await AsyncStorage.setItem('healthcare', JSON.stringify(tempObject));
-        // console.log(await AsyncStorage.getItem('healthcare'));
-        // let result = await axios.post("http://192.168.1.218:7000/api/healthcare/udate",
-        //     { data: JSON.parse(await AsyncStorage.getItem('healthcare')) });
-        navigation.navigate('Overview');
+        let result = await axios.post("http://192.168.1.218:7000/api/healthcare/update",tempObject);
+        if(result.data.error){
+            Alert.alert("Có lỗi");
+        }else{
+            navigation.navigate('Overview');
+        }
         
     }
     render() {

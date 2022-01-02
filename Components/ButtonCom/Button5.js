@@ -8,8 +8,7 @@ class Button5 extends Component {
         super(props);
     }
     render() {
-        const { name, icon } = this.props;
-        const { onClicked } = this.props;
+        const { name, icon, onClicked  } = this.props;
         return <TouchableOpacity onPress={onClicked}>
             <View style={styles.container}>
                 <Image
@@ -28,7 +27,7 @@ export default Button5;
 
 const styles = StyleSheet.create({
     container: {
-        marginVertical: 20,
+        margin: 5,
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",

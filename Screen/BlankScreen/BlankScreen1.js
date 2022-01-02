@@ -10,9 +10,10 @@ export default class BlankScreen1 extends Component {
         }
     }
     async componentDidMount() {
+        // await AsyncStorage.clear()
         const { navigation } = this.props;
         let token = await AsyncStorage.getItem('token');
-        if (token == null) 
+        if (token === null) 
             navigation.navigate("Authentication")
         else{
             axios.defaults.headers.common['Authorization'] = token;
@@ -26,7 +27,6 @@ export default class BlankScreen1 extends Component {
             let message = await axios.get("http://192.168.1.218:7000/api/message/get");
             await AsyncStorage.setItem('chatBoxList',JSON.stringify(message.data));
             navigation.navigate("MainNavigator");
-
         }  
     }
     render() {
