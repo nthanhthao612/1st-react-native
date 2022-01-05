@@ -17,14 +17,14 @@ export default class BlankScreen1 extends Component {
             navigation.navigate("Authentication")
         else{
             axios.defaults.headers.common['Authorization'] = token;
-            let userData = await axios.get("http://192.168.1.218:7000/api/user/info");
+            let userData = await axios.get("http://128.199.91.133:7000/api/user/info");
             await AsyncStorage.setItem('userData', JSON.stringify(userData.data));
             
             const { data } = await axios.
-                get("http://192.168.1.218:7000/api/healthcare/getfinal");
+                get("http://128.199.91.133:7000/api/healthcare/getfinal");
             await AsyncStorage.setItem('healthcare', JSON.stringify(data));
 
-            let message = await axios.get("http://192.168.1.218:7000/api/message/get");
+            let message = await axios.get("http://128.199.91.133:7000/api/message/get");
             await AsyncStorage.setItem('chatBoxList',JSON.stringify(message.data));
             navigation.navigate("MainNavigator");
         }  

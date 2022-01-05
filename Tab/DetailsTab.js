@@ -34,11 +34,11 @@ class DetailsTab extends Component {
             }
         >
             <Stack.Screen name="MainDetails" component={DetailsScreen} />
-            <Stack.Screen name="Footsteps" component={FootStepsNavigation} />
-            <Stack.Screen name="BloodPressure" component={BloodPressureNavigation} />
-            <Stack.Screen name="SleepingTime" component={SleepingTimesNavigation} />
+            <Stack.Screen name="footsteps" component={FootStepsNavigation} />
+            <Stack.Screen name="bloodPressure" component={BloodPressureNavigation} />
+            <Stack.Screen name="sleepingTime" component={SleepingTimesNavigation} />
             <Stack.Screen name="BMI" component={BmiNavigation} />
-            <Stack.Screen name="HeartBeat" component={HeartBeatNavigation} />
+            <Stack.Screen name="heartBeat" component={HeartBeatNavigation} />
         </Stack.Navigator>
     }
 }

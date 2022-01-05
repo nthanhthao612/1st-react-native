@@ -33,7 +33,7 @@ class RegisterInputComponent extends Component {
     async RegisterBtnonPressed() {
         const { navigation } = this.props;
         const { data } = await axios.
-            post("http://192.168.1.218:7000/api/user/register",
+            post("http://128.199.91.133:7000/api/user/register",
                 { data: this.state });
         if (!data.error) {
             Alert.alert("Đăng ký thành công","Mời đăng nhập");

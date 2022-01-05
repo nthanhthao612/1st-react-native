@@ -18,11 +18,11 @@ class ActivityArea extends Component {
     }
     componentDidMount() {
         let { data } = this.props;
-        if (data.keyword === "SleepingTime")
+        if (data.keyword === "sleepingTime")
             this.props.data.picture = Sleeping;
-        else if (data.keyword === "Footsteps")
+        else if (data.keyword === "footsteps")
             this.props.data.picture = FootStep;
-        else if (data.keyword === "HeartBeat")
+        else if (data.keyword === "heartBeat")
             this.props.data.picture = HeartBeat;
         else if (data.keyword === "BMI")
             this.props.data.picture = Bmi;
