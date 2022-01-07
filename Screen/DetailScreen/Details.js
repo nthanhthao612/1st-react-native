@@ -15,7 +15,7 @@ class DetailScreen extends Component {
         }
     }
     async componentDidMount() {
-        let { data } = await axios.get("http://192.168.1.218:7000/api/healthcare/getfinal");
+        let { data } = await axios.get(`${global.urladdress}/api/healthcare/getfinal`);
         await AsyncStorage.setItem('healthcare',JSON.stringify(data));
         data = JSON.parse(JSON.stringify(data));
         let { _id, listRecorded } = data;

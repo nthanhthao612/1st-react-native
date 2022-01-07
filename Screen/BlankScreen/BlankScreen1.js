@@ -8,7 +8,6 @@ export default class BlankScreen1 extends Component {
     }
     async componentDidMount() { 
         // await AsyncStorage.clear()
-        // console.log(global.urladdress);
         const { navigation } = this.props;
         let token = await AsyncStorage.getItem('token');
         if (token === null) 
