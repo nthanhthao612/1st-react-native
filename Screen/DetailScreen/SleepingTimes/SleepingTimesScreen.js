@@ -22,23 +22,17 @@ class SleepingTimesScreen extends Component {
         }
     }
     async componentDidMount() {
-        let healthCare = JSON.parse(
-            await AsyncStorage.getItem('healthcare'));
-        let { listRecorded } = healthCare;
-        let lastRecorded = JSON.parse(
-            await AsyncStorage.getItem('lastRecorded'));
+        let { _id, listRecorded } = JSON.parse(await AsyncStorage.getItem('healthcare'));
+        let lastRecorded = JSON.parse(await AsyncStorage.getItem('lastRecored'));
         let { sleepingTimes } = lastRecorded;
         this.setState(state => {
             return {
                 listRecorded: listRecorded,
                 lastRecorded: sleepingTimes,
+                healthcareID: _id,
+                lastDate: lastRecorded.data
             }
         });
-        this.setState(state =>{
-            return{
-                lastDate: this.state.listRecorded[this.state.listRecorded.length-1].Date
-            }
-        })
     }
     NumeralToTime(numeral){
         let data = {};

@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -20,54 +20,31 @@ class BMIScreen extends Component {
             listRecorded: {},
             lastRecorded: {},
             lastDate: "",
-            reload: true
+            healthcareID: "",
         }
-        this.EditBtnClicked = this.EditBtnClicked.bind(this);
-        this.RefreshBtnClicked = this.RefreshBtnClicked.bind(this);
+        this.DoneButtonPressed = this.DoneButtonPressed.bind(this);
     }
     async componentDidMount() {
-        console.log("BMI MOUNT");
-        await AsyncStorage.removeItem('healthcare');
-        const { data } = await axios.
-            get("http://192.168.1.218:7000/api/healthcare/getfinal");
-        if (data) {
-            await AsyncStorage.setItem('healthcare', JSON.stringify(data));
-            let healthCare = JSON.parse(
-                await AsyncStorage.getItem('healthcare'));
-            let { listRecorded } = healthCare;
-            let lastRecorded = JSON.parse(
-                await AsyncStorage.getItem('lastRecorded'));
-            let { BMI } = lastRecorded;
-            this.setState(state => {
-                return {
-                    listRecorded: listRecorded,
-                    lastRecorded: BMI,
-                }
-            });
-            this.setState(state => {
-                return {
-                    lastDate: this.state.listRecorded[this.state.listRecorded.length - 1].Date
-                }
-            });
-            console.log("xong");
-        }else{
-            console.log("co loi");
-        }
+        let { _id, listRecorded } = JSON.parse(await AsyncStorage.getItem('healthcare'));
+        let lastRecorded = JSON.parse(await AsyncStorage.getItem('lastRecored'));
+        let { BMI } = lastRecorded;
+        this.setState(state => {
+            return {
+                listRecorded: listRecorded,
+                lastRecorded: BMI,
+                healthcareID: _id,
+                lastDate: lastRecorded.data
+            }
+        });
     }
-    componentWillUnmount(){
-        console.log("unmout");
-    }
-    EditBtnClicked() {
-        let { lastRecorded } = this.state;
-        let { navigation } = this.props;
-        this.props.navigation.replace('Update');
-        navigation.navigate("Update", { lastRecorded: lastRecorded });
-    }
-    async RefreshBtnClicked() {
+    async DoneButtonPressed() {
+        let {navigation} = this.props;
+        let { healthcareID } = this.state;
+        await axios.post(`${global.urladdress}/api/healthcare/updatebmi`, { data: healthcareID });
+        navigation.replace("MainDetails");
     }
     render() {
         let { lastRecorded, listRecorded, lastDate } = this.state;
-        // console.log(lastRecorded);
         let { navigation } = this.props;
         return <View style={styles.container}>
             <LastRecordedCom
@@ -88,19 +65,12 @@ class BMIScreen extends Component {
                 <Button5
                     icon={EditIcon}
                     name={"Cập Nhật"}
-                    onClicked={this.EditBtnClicked}
+                    onClicked={this.DoneButtonPressed}
                 />
                 <Button5
                     icon={StatisticsIcon}
                     name={"Lịch sử"}
                     onClicked={() => navigation.navigate("Statistics", { listRecorded: listRecorded })}
-                />
-            </View>
-            <View style={styles.RefreshBtnArea}>
-                <Button5
-                    icon={RefreshIcon}
-                    name={"Làm mới"}
-                    onClicked={this.RefreshBtnClicked}
                 />
             </View>
         </View>

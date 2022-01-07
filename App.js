@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+global.urladdress = "http://128.199.91.133:7000";
+
 import BlackScreen1 from './Screen/BlankScreen/BlankScreen1';
 import BlackScreen2 from './Screen/BlankScreen/BlankScreen2';
 import AuthenticationNavigator from './AuthenticationNavigator';

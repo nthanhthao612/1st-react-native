@@ -3,8 +3,6 @@ import {StyleSheet, FlatList } from 'react-native';
 import { Dimensions } from 'react-native';
 
 import StatisticsBox from '../../../Components/BloodPressureComponent/statisticsBox';
-const ScreenWidth = Dimensions.get("window").width;
-const ScreenHeight = Dimensions.get("window").height;
 
 class StatisticsScreen extends Component {
     constructor(props) {
@@ -44,8 +42,6 @@ const styles = StyleSheet.create({
     container: {
         marginTop: 20,
         flexDirection:"column",
-        // height:"100%",
-        // width: "100%",
         alignItems: "center",
     }
 });

@@ -21,7 +21,7 @@ class LoginInputComponent extends Component {
     async LoginBtnonPressed() {
         const {navigation} = this.props;
         const {data} = await axios.
-            post("http://128.199.91.133:7000/api/user/login",
+            post(`${global.urladdress}/api/user/login`,
                 { data: this.state });
         if(!data.error){
             await AsyncStorage.setItem('token',data);

@@ -1,10 +1,8 @@
-import React, { Component, lazy } from 'react';
+import React, { Component} from 'react';
 import {View, StyleSheet} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Dimensions } from 'react-native';
+import axios from 'axios';
 
-const ScreenWidth = Dimensions.get("window").width;
-const ScreenHeight = Dimensions.get("window").height;
 import LastRecordedCom from '../../../Components/HeartBeatComponent/LastRecordedCom';
 import Button5 from "../../../Components/ButtonCom/Button5";
 import UpdatingIcon from "../../../img/updating.png";
@@ -16,27 +14,31 @@ class HeartBeatScreen extends Component {
         this.state = {
             listRecorded: {},
             lastRecorded: {},
-            lastDate: ""
+            lastDate: "",
+            healthcareID: ""
         }
+        this.DoneButtonPressed = this.DoneButtonPressed.bind(this);
     }
     async componentDidMount() {
-        let healthCare = JSON.parse(
-            await AsyncStorage.getItem('healthcare'));
-        let { listRecorded } = healthCare;
-        let lastRecorded = JSON.parse(
-            await AsyncStorage.getItem('lastRecorded'));
+        let { _id, listRecorded } = JSON.parse(await AsyncStorage.getItem('healthcare'));
+        let lastRecorded = JSON.parse(await AsyncStorage.getItem('lastRecored'));
         let { heartBeat } = lastRecorded;
         this.setState(state => {
             return {
                 listRecorded: listRecorded,
                 lastRecorded: heartBeat,
+                healthcareID: _id,
+                lastDate: lastRecorded.data
             }
         });
-        this.setState(state =>{
-            return{
-                lastDate: this.state.listRecorded[this.state.listRecorded.length-1].Date
-            }
-        })
+    }
+    async DoneButtonPressed() {
+        
+        let {healthcareID} = this.state;
+        console.log(healthcareID);
+        await axios.post(`${global.urladdress}/api/healthcare/updateheartbeat`,{data:healthcareID});
+        let {navigation} = this.props;
+        navigation.replace("MainDetails");
     }
     render() {
         let { lastRecorded,listRecorded,lastDate} = this.state;
@@ -50,7 +52,7 @@ class HeartBeatScreen extends Component {
                 <Button5 
                 icon={UpdatingIcon}
                 name={"Cập Nhật"}
-                onClicked={()=>navigation.navigate("Update",{lastRecorded:lastRecorded})}
+                onClicked={this.DoneButtonPressed}
                 />
                 <Button5 
                 icon={StatisticsIcon}

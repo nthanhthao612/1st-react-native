@@ -16,12 +16,17 @@ const Stack = createNativeStackNavigator();
 class DetailsTab extends Component {
     constructor(props) {
         super(props);
+        
     }
-    // async componentDidMount() {
-    //     const { data } = await axios.
-    //         get("http://192.168.1.218:7000/api/healthcare/getfinal");
-    //     await AsyncStorage.setItem('healthcare', JSON.stringify(data));
-    // }
+    async componentDidMount() {
+        // .
+        // then(function(data){
+        //     let temp = data.data;
+        //     AsyncStorage.setItem('healthcare',JSON.stringify(temp))
+        //     .then(async function(data){{
+        //     }});
+        // })
+    }
     render() {
         let { navigation, route } = this.props;
         return <Stack.Navigator
@@ -43,8 +48,5 @@ class DetailsTab extends Component {
     }
 }
 
-// function DetailsTab({ navigation, route }) {
-
-// }
 
 export default DetailsTab;

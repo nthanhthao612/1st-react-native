@@ -11,14 +11,8 @@ export default class BlankScreen2 extends Component {
     }
     async componentDidMount() {
         let {navigation} = this.props;
-        let userData = await axios.get("http://128.199.91.133:7000/api/user/info");
+        let userData = await axios.get(`${global.urladdress}/api/user/info`);
         await AsyncStorage.setItem('userData', JSON.stringify(userData.data));
-        const { data } = await axios.
-            get("http://128.199.91.133:7000/api/healthcare/getfinal");
-        await AsyncStorage.setItem('healthcare', JSON.stringify(data));
-        
-        let message = await axios.get("http://128.199.91.133:7000/api/message/get");
-            await AsyncStorage.setItem('chatBoxList',JSON.stringify(message.data));
         navigation.navigate("MainNavigator");
     }
     render() {

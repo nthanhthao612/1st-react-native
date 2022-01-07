@@ -3,7 +3,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import BloodPressureScreen from './BloodPressureScreen';
 import StatisticsScreen from './statisticsScreen';
-import UpdateScreen from './updateScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +15,6 @@ function BloodPressureNavigation({ navigation, route }) {
     >
         <Stack.Screen name="Overview" component={BloodPressureScreen} />
         <Stack.Screen name="Statistics" component={StatisticsScreen} />
-        {/* <Stack.Screen name="Update" component={UpdateScreen}/> */}
     </Stack.Navigator>
 }
 export default BloodPressureNavigation;

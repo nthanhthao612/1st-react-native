@@ -12,14 +12,14 @@ import { Switch } from 'react-native-elements/dist/switch/switch';
 
 function DisplayQRCode(props) {
     return <QRCode
-        value="https://www.facebook.com/Killer.use/"
+        value={props.value}
         logoBackgroundColor='transparent'
         size={ScreenWidth * 2 / 3}
     />
 }
 function DisplayBarCode(props) {
     return <Barcode
-        value="https://www.facebook.com/Killer.use/"
+        value={props.value}
         logoBackgroundColor='transparent'
         maxWidth={ScreenWidth * 4 / 5}
         height={ScreenWidth * 3 / 7}
@@ -60,7 +60,7 @@ class OverviewScreen extends Component {
             </View>
             <View style={styles.overviewPicArea}>
                 {
-                    this.state.isQRCode ? <DisplayQRCode /> : <DisplayBarCode />
+                    this.state.isQRCode ? <DisplayQRCode value={currentUser._id}/> : <DisplayBarCode value={currentUser._id}/>
                 }
             </View>
             <OverviewInfo currentUser={currentUser}></OverviewInfo>

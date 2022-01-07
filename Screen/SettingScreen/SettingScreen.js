@@ -28,7 +28,7 @@ export default class SettingsScreen extends Component {
                 currentUser: JSON.parse(userData)
             }
         });
-        let calendar = await axios.get("http://128.199.91.133:7000/api/calendar/get");
+        let calendar = await axios.get(`${global.urladdress}/api/calendar/get`);
         await AsyncStorage.setItem('calendar', JSON.stringify(calendar.data));
     }
     render() {

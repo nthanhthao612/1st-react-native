@@ -1,13 +1,12 @@
 import React, { Component, lazy } from 'react';
-import {View, StyleSheet} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Dimensions } from 'react-native';
+import axios from 'axios';
 
-const ScreenWidth = Dimensions.get("window").width;
-const ScreenHeight = Dimensions.get("window").height;
 import LastRecordedCom from '../../../Components/FootStepsComponent/LastRecordedCom';
 import Button5 from "../../../Components/ButtonCom/Button5";
 import StatisticsIcon from "../../../img/statistics.png";
+import UpdatingIcon from "../../../img/updating.png";
 
 class FootStepsScreen extends Component {
     constructor(props) {
@@ -15,41 +14,48 @@ class FootStepsScreen extends Component {
         this.state = {
             listRecorded: {},
             lastRecorded: {},
-            lastDate: ""
+            lastDate: "",
+            healthcareID: ""
         }
+        this.DoneButtonPressed = this.DoneButtonPressed.bind(this);
     }
     async componentDidMount() {
-        let healthCare = JSON.parse(
-            await AsyncStorage.getItem('healthcare'));
-        let { listRecorded } = healthCare;
-        let lastRecorded = JSON.parse(
-            await AsyncStorage.getItem('lastRecorded'));
+        let { _id, listRecorded } = JSON.parse(await AsyncStorage.getItem('healthcare'));
+        let lastRecorded = JSON.parse(await AsyncStorage.getItem('lastRecored'));
         let { footSteps } = lastRecorded;
         this.setState(state => {
             return {
                 listRecorded: listRecorded,
                 lastRecorded: footSteps,
+                healthcareID: _id,
+                lastDate: lastRecorded.data
             }
         });
-        this.setState(state =>{
-            return{
-                lastDate: this.state.listRecorded[this.state.listRecorded.length-1].Date
-            }
-        })
+    }
+    async DoneButtonPressed() {
+        let {healthcareID} = this.state;
+        await axios.post(`${global.urladdress}/api/healthcare/updatefootsteps`,{data:healthcareID});
+        let {navigation} = this.props;
+        navigation.replace("MainDetails");
     }
     render() {
-        let { lastRecorded,listRecorded,lastDate} = this.state;
-        let {navigation} = this.props;
+        let { lastRecorded, listRecorded, lastDate } = this.state;
+        let { navigation } = this.props;
         return <View style={styles.container}>
-            <LastRecordedCom 
-            data={lastRecorded}
-            lastDate={lastDate}
+            <LastRecordedCom
+                data={lastRecorded}
+                lastDate={lastDate}
             />
             <View style={styles.ButtonArea}>
-                <Button5 
-                icon={StatisticsIcon}
-                name={"Lịch sử"}
-                onClicked={()=>navigation.navigate("Statistics",{listRecorded:listRecorded})}
+                <Button5
+                    icon={UpdatingIcon}
+                    name={"Cập Nhật"}
+                    onClicked={this.DoneButtonPressed}
+                />
+                <Button5
+                    icon={StatisticsIcon}
+                    name={"Lịch sử"}
+                    onClicked={() => navigation.navigate("Statistics", { listRecorded: listRecorded })}
                 />
             </View>
         </View>
@@ -72,10 +78,10 @@ const styles = StyleSheet.create({
         height: "10%",
         width: "95%"
     },
-    ButtonArea:{
+    ButtonArea: {
         marginTop: 20,
         flexDirection: 'row',
-        width:"100%",
+        width: "100%",
         justifyContent: "space-around",
     }
 });

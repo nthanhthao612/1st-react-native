@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { FlatList, Alert, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+
 
 import Item from "../../Components/DetailComponent/Item";
 
@@ -8,44 +10,39 @@ class DetailScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lastHealthCareID:"",
+            lastHealthCareID: "",
             ListItem: {},
-            reload: false,
         }
     }
     async componentDidMount() {
-        let healthCareInfo = JSON.parse(
-            await AsyncStorage.getItem('healthcare'));
-        let { listRecorded } = healthCareInfo;
-        if (listRecorded.length != 0) {
-            let lastRecorded = listRecorded[listRecorded.length - 1];
-            await AsyncStorage.setItem('healthcareID',healthCareInfo._id);
-            delete lastRecorded._id;
-            delete lastRecorded.Date;
-            this.setState(state => {
-                return {
-                    ListItem: lastRecorded
-                }
-            });
-            if(lastRecorded.BMI.height == 0 && lastRecorded.BMI.weight ==0){
-                Alert.alert("Chưa có dữ liệu","Dữ liệu mặc định được khởi tạo!");
+        let { data } = await axios.get("http://192.168.1.218:7000/api/healthcare/getfinal");
+        await AsyncStorage.setItem('healthcare',JSON.stringify(data));
+        data = JSON.parse(JSON.stringify(data));
+        let { _id, listRecorded } = data;
+        await AsyncStorage.setItem('healthcareID', _id);
+        let lastRecorded = listRecorded.pop();
+        this.setState({ lastHealthCareID: lastRecorded._id });
+        await AsyncStorage.setItem('lastRecored',JSON.stringify(lastRecorded));
+        delete lastRecorded._id;
+        delete lastRecorded.Date;
+        this.setState(state => {
+            return {
+                ListItem: lastRecorded
             }
-            await AsyncStorage.setItem('lastRecorded',
-                JSON.stringify(this.state.ListItem));
-        }
+        });
     }
-    onPressed(keyword){
+    onPressed(keyword) {
         const { navigation } = this.props;
         this.props.navigation.replace(keyword);
         navigation.navigate(keyword);
     }
     render() {
-        const data = this.state.ListItem ? Object.values(this.state.ListItem) : []
+        const ListItem = this.state.ListItem ? Object.values(this.state.ListItem) : []
         const { navigation } = this.props;
         return <View>
-            <FlatList data={data}
+            <FlatList data={ListItem}
                 renderItem={({ item }) => <Item item={item}
-                    onPressed={()=>navigation.navigate(item.keyword)} />}
+                    onPressed={() => navigation.navigate(item.keyword)} />}
                 keyExtractor={item => item.activityId}
                 contentContainerStyle={{
                     paddingHorizontal: 16,
@@ -53,8 +50,7 @@ class DetailScreen extends Component {
                     backgroundColor: "#F2F2F2"
                 }}
             />
-        </View>
-            ;
+        </View>;
     }
 }
 export default DetailScreen;
