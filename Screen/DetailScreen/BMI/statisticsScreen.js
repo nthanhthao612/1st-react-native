@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StyleSheet, FlatList } from 'react-native';
 import { Dimensions } from 'react-native';
 
 import StatisticsBox from '../../../Components/BMIcomponent/statisticsBox';
-const ScreenWidth = Dimensions.get("window").width;
-const ScreenHeight = Dimensions.get("window").height;
+
 
 class StatisticsScreen extends Component {
     constructor(props) {

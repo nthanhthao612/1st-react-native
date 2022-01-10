@@ -8,7 +8,7 @@ import BloodPressure from "../../img/blood-pressure.png";
 import Bmi from "../../img/bmi.png";
 import HeartBeat from "../../img/heartbeat.png";
 import Sleeping from "../../img/sleeping.png";
-import FootStep from "../../img/footstep.png";
+import Temperature from "../../img/temperature.png"
 
 import Numberal from './Numeral';
 
@@ -20,8 +20,8 @@ class ActivityArea extends Component {
         let { data } = this.props;
         if (data.keyword === "sleepingTime")
             this.props.data.picture = Sleeping;
-        else if (data.keyword === "footsteps")
-            this.props.data.picture = FootStep;
+        else if (data.keyword === "bodyTemperature")
+            this.props.data.picture = Temperature;
         else if (data.keyword === "heartBeat")
             this.props.data.picture = HeartBeat;
         else if (data.keyword === "BMI")

@@ -8,7 +8,6 @@ import LastRecordedCom from '../../../Components/BMIcomponent/LastRecordedCom';
 import HeightIcon from "../../../img/height.png";
 import WeightIcon from "../../../img/weight.png";
 import Button5 from "../../../Components/ButtonCom/Button5";
-import RefreshIcon from "../../../img/updating.png";
 import StatisticsIcon from "../../../img/statistics.png";
 import NumeralBox5 from '../../../Components/NumeralCom/NumeralBox5';
 

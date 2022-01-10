@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, Alert, View } from 'react-native';
+import { FlatList,View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 

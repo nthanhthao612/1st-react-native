@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
 
 import DetailsScreen from '../Screen/DetailScreen/Details';
-import FootStepsNavigation from '../Screen/DetailScreen/FootSteps/FootStepsNavigation';
 import BmiNavigation from '../Screen/DetailScreen/BMI/BmiNavigation';
 import SleepingTimesNavigation from '../Screen/DetailScreen/SleepingTimes/SleepingTimesNavigation';
 import HeartBeatNavigation from '../Screen/DetailScreen/HeartBeat/HeartBeatNavigation';
 import BloodPressureNavigation from '../Screen/DetailScreen/BloodPressure/BloodPressureNavigation';
+import BodyTemperatureNavigation from '../Screen/DetailScreen/BodyTemperature/BodyTemperatureNavigation';
 
 
 const Stack = createNativeStackNavigator();
@@ -19,13 +17,6 @@ class DetailsTab extends Component {
         
     }
     async componentDidMount() {
-        // .
-        // then(function(data){
-        //     let temp = data.data;
-        //     AsyncStorage.setItem('healthcare',JSON.stringify(temp))
-        //     .then(async function(data){{
-        //     }});
-        // })
     }
     render() {
         let { navigation, route } = this.props;
@@ -39,7 +30,7 @@ class DetailsTab extends Component {
             }
         >
             <Stack.Screen name="MainDetails" component={DetailsScreen} />
-            <Stack.Screen name="footsteps" component={FootStepsNavigation} />
+            <Stack.Screen name="bodyTemperature" component={BodyTemperatureNavigation} />
             <Stack.Screen name="bloodPressure" component={BloodPressureNavigation} />
             <Stack.Screen name="sleepingTime" component={SleepingTimesNavigation} />
             <Stack.Screen name="BMI" component={BmiNavigation} />

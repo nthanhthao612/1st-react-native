@@ -6,7 +6,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Dimensions } from 'react-native';
 
 const ScreenWidth = Dimensions.get("window").width;
-const ScreenHeight = Dimensions.get("window").height;
 import OverviewInfo from "../../Components/OverviewComponent/OverviewInfoComponent";
 import { Switch } from 'react-native-elements/dist/switch/switch';
 

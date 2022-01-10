@@ -5,22 +5,18 @@ import { Dimensions } from 'react-native';
 import NumeralVerticalBox5 from '../NumeralCom/NumeralVerticalBox5';
 const ScreenWidth = Dimensions.get("window").width;
 const ScreenHeight = Dimensions.get("window").height;
-import FootStepsIcon from '../../img/footstep.png';
-import DistanceIcon from '../../img/distance.png';
+import TemperatureIcon from '../../img/temperature.png';
 
 class StatisticsBox extends Component {
     constructor(props) {
         super(props);
     }
     render() {
-        let { FootSteps,Date } = this.props.item;
+        let {BodyTemperature , Date } = this.props.item;
         return <View style={styles.container}>
         <NumeralVerticalBox5
-            value={`${FootSteps.numeral} ${FootSteps.unit}`}
-            icon={FootStepsIcon} />
-        <NumeralVerticalBox5
-            value={`${FootSteps.distance} M`}
-            icon={DistanceIcon} />
+            value={`${BodyTemperature.numeral} ${BodyTemperature.unit}`}
+            icon={TemperatureIcon} />
         <View style={
             {
                 flexDirection:"column",
@@ -28,6 +24,7 @@ class StatisticsBox extends Component {
             }
         }>
             <Text style={{ fontWeight: "bold",fontSize: 12}}>{Date}</Text>
+            <Text style={{ fontWeight: "bold",fontSize: 12}}>{BodyTemperature.time}</Text>
         </View>
     </View>;
     }

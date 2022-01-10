@@ -4,7 +4,7 @@ import { Dimensions } from 'react-native';
 
 const ScreenWidth = Dimensions.get("window").width;
 const ScreenHeight = Dimensions.get("window").height;
-import FootStepsIcon from "../../img/footsteps1.png";
+import TemperatureIcon from "../../img/temperature.png";
 
 class LastRecordedCom extends Component {
     constructor(props) {
@@ -16,7 +16,7 @@ class LastRecordedCom extends Component {
         return <View style={styles.container}>
             <View style={styles.numberal}>
                 <Image
-                    source={FootStepsIcon}
+                    source={TemperatureIcon}
                     style={{
                         height: ScreenWidth*25/100,
                         width: ScreenWidth*25/100

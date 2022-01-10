@@ -1,41 +1,42 @@
-import React, { Component, lazy } from 'react';
+import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-import LastRecordedCom from '../../../Components/FootStepsComponent/LastRecordedCom';
+import EditIcon from "../../../img/edit.png";
+import LastRecordedCom from '../../../Components/BodyTemperatureComponent/LastRecordedCom';
 import Button5 from "../../../Components/ButtonCom/Button5";
 import StatisticsIcon from "../../../img/statistics.png";
-import UpdatingIcon from "../../../img/updating.png";
 
-class FootStepsScreen extends Component {
+
+class BMIScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
             listRecorded: {},
             lastRecorded: {},
             lastDate: "",
-            healthcareID: ""
+            healthcareID: "",
         }
         this.DoneButtonPressed = this.DoneButtonPressed.bind(this);
     }
     async componentDidMount() {
         let { _id, listRecorded } = JSON.parse(await AsyncStorage.getItem('healthcare'));
         let lastRecorded = JSON.parse(await AsyncStorage.getItem('lastRecored'));
-        let { footSteps } = lastRecorded;
+        let { bodyTemperature } = lastRecorded;
         this.setState(state => {
             return {
                 listRecorded: listRecorded,
-                lastRecorded: footSteps,
+                lastRecorded: bodyTemperature,
                 healthcareID: _id,
                 lastDate: lastRecorded.data
             }
         });
     }
     async DoneButtonPressed() {
-        let {healthcareID} = this.state;
-        await axios.post(`${global.urladdress}/api/healthcare/updatefootsteps`,{data:healthcareID});
         let {navigation} = this.props;
+        let { healthcareID } = this.state;
+        await axios.post(`${global.urladdress}/api/healthcare/updatebodytemperature`, { data: healthcareID });
         navigation.replace("MainDetails");
     }
     render() {
@@ -48,7 +49,7 @@ class FootStepsScreen extends Component {
             />
             <View style={styles.ButtonArea}>
                 <Button5
-                    icon={UpdatingIcon}
+                    icon={EditIcon}
                     name={"Cập Nhật"}
                     onClicked={this.DoneButtonPressed}
                 />
@@ -62,9 +63,9 @@ class FootStepsScreen extends Component {
     }
 }
 
-export default FootStepsScreen;
+export default BMIScreen;
 
-const styles = StyleSheet.create({
+let styles = StyleSheet.create({
     container: {
         flexDirection: "column",
         alignItems: "center",
@@ -83,5 +84,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: "100%",
         justifyContent: "space-around",
+    },
+    RefreshBtnArea: {
+        height: "30%",
+        justifyContent: "flex-end",
+        alignItems: "flex-end",
     }
 });

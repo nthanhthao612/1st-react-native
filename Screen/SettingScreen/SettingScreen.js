@@ -3,7 +3,6 @@ import { View, Text, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-import InfoIcon from "../../img/information.png";
 import LogoutIcon from "../../img/logout.png";
 import Button5 from "../../Components/ButtonCom/Button5";
 import OptionCom5 from '../../Components/SettingScreenCom/OptionCom5';
